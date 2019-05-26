@@ -8,4 +8,13 @@
     <string name="Email">Email</string>
     <string name="back_to_login">Back to login</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="change_password">Change Password</string>
+    <string name="new_password">New Password</string>
+    <string name="change_information">Change Informaton</string>
+    <string name="change_email">Change Email</string>
+    <string name="change_name">Change Name</string>
+    <string name="change_password_button">Change Password</string>
+    <string name="update">Update</string>
+    <string name="delete_information">Delete Information</string>
+    <string name="delete_account">Delete Account</string>
 </resources>

@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                     String Password = mTextPassword.getText().toString();
                     String Name = mTextName.getText().toString();
 
-                    User currentUser = db.Authenticate(new User(null, Email, Password, Name));
+                    User currentUser = db.Authenticate(new User(Email, Password, Name));
 
                     if (currentUser != null) {
                         Snackbar.make(mButtonLogin, "Successfully Logged In!", Snackbar.LENGTH_LONG).show();

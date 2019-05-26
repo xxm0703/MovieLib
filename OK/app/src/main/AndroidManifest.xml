@@ -18,6 +18,8 @@
         </activity>
         <activity android:name=".HomeActivity"> </activity>
         <activity android:name=".RegisterActivity"> </activity>
+        <activity android:name=".ChangePasswordActivity"> </activity>
+        <activity android:name=".DeleteAccountActivity"> </activity>
     </application>
 
 </manifest>

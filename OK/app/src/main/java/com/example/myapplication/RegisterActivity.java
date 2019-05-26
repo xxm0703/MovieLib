@@ -50,7 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
                     String Name = mTextName.getText().toString();
 
                     if (!db.isEmailExists(Email)) {
-                        db.addUser(new User(null, Email, Password, Name));
+                        db.addUser(new User(Email, Password, Name));
                         Snackbar.make(mButtonRegister, "User created successfully! Please Login!", Snackbar.LENGTH_LONG).show();
                         new Handler().postDelayed(new Runnable() {
                             @Override

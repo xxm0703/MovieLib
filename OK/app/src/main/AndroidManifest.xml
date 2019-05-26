@@ -20,6 +20,12 @@
         <activity android:name=".RegisterActivity"> </activity>
         <activity android:name=".ChangePasswordActivity"> </activity>
         <activity android:name=".DeleteAccountActivity"> </activity>
+        <activity android:name=".DeleteGenreActivity"> </activity>
+        <activity android:name=".AddGenreActivity"> </activity>
+        <activity android:name=".GenreActivity"> </activity>
+        <activity android:name=".DeleteActorActivity"> </activity>
+        <activity android:name=".AddActorActivity"> </activity>
+        <activity android:name=".ActorActivity"> </activity>
     </application>
 
 </manifest>

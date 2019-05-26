@@ -16,12 +16,13 @@ public class Users extends SQLiteOpenHelper {
 
 
     public Users(Context context) {
-        super(context, DATABASE_NAME, null, 1);
+        super(context, DATABASE_NAME, null, 2);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(String.format("CREATE TABLE %s (email Text PRIMARY, password Text, name Text)", TABLE_NAME));
+        db.execSQL(String.format("CREATE TABLE %s (email Text PRIMARY KEY, password Text, name Text)", TABLE_NAME));
+
     }
 
     @Override

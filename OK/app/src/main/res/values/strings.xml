@@ -18,4 +18,17 @@
     <string name="delete_information">Delete Information</string>
     <string name="delete_account">Delete Account</string>
     <string name="swipe_left_to_see_nav_bar">Swipe Left to See NavBar</string>
+    <string name="add_genre">Add Genre</string>
+    <string name="delete_genre">Delete Genre</string>
+    <string name="todo">TODO</string>
+    <string name="go_to_menu">Go To Main Menu</string>
+    <string name="genres">Genres</string>
+    <string name="genre">Genre</string>
+    <string name="actors">Actors</string>
+    <string name="movies">Movies</string>
+    <string name="cassets">Cassets</string>
+    <string name="delete_actor">Delete Actor</string>
+    <string name="add_actor">Add Actor</string>
+    <string name="actor_name">Actor Name</string>
+    <string name="actor_age">Actor Age</string>
 </resources>

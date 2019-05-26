@@ -10,4 +10,26 @@
         android:title = "@string/delete_account"
         android:icon = "@drawable/ic_delete_forever_black_24dp">
     </item>
+
+    <item
+        android:id = "@+id/genres"
+        android:title = "@string/genres"
+        android:icon = "@drawable/ic_code_black_24dp">
+    </item>
+    <item
+        android:id = "@+id/actors"
+        android:title = "@string/actors"
+        android:icon = "@drawable/ic_person_black_24dp">
+    </item>
+    <item
+        android:id = "@+id/movies"
+        android:title = "@string/movies"
+        android:icon = "@drawable/ic_movie_filter_black_24dp">
+    </item>
+    <item
+        android:id = "@+id/cassets"
+        android:title = "@string/cassets"
+        android:icon = "@drawable/ic_view_comfy_black_24dp">
+    </item>
+
 </menu>

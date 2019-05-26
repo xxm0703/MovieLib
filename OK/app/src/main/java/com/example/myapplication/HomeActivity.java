@@ -11,8 +11,6 @@ import android.widget.Button;
 
 public class HomeActivity extends AppCompatActivity {
     Users db;
-   // Button mButtonUpdate;
-    //Button mButtonDelete;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +31,14 @@ public class HomeActivity extends AppCompatActivity {
                 if(id == R.id.nav_view_delete) {
                     Intent toLogin = new Intent(HomeActivity.this, DeleteAccountActivity.class);
                     startActivity(toLogin);
+                }
+                if(id == R.id.genres) {
+                    Intent toGenres = new Intent(HomeActivity.this, GenreActivity.class);
+                    startActivity(toGenres);
+                }
+                if(id == R.id.actors) {
+                    Intent toGenres = new Intent(HomeActivity.this, ActorActivity.class);
+                    startActivity(toGenres);
                 }
                 return true;
             }

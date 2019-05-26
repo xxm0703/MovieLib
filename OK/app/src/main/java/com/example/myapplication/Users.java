@@ -7,8 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class Users extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME = "register.db";
-    public static final String TABLE_NAME = "registerUser";
+    public static final String DATABASE_NAME = "movie_lib.db";
+    public static final String TABLE_NAME = "users";
     public static final String COL_1 = "ID";
     public static final String COL_2 = "email";
     public static final String COL_3 = "password";

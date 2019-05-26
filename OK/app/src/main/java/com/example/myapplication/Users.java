@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 
 public class Users extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME = "movie_lib.db";
     public static final String TABLE_NAME = "users";
     public static final String COL_2 = "email";
     public static final String COL_3 = "password";
@@ -16,7 +15,7 @@ public class Users extends SQLiteOpenHelper {
 
 
     public Users(Context context) {
-        super(context, DATABASE_NAME, null, 2);
+        super(context, Config.DATABASE_NAME, null, Config.DATABASE_VERSION);
     }
 
     @Override

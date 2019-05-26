@@ -88,7 +88,6 @@ public class Genres extends SQLiteOpenHelper {
 
         return genres;
     }
-
     private boolean exists(Genre genre) {
         return findByName(genre.getName()) != null;
     }

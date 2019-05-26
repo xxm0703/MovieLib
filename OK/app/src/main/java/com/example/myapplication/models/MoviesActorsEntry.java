@@ -1,4 +1,7 @@
-package com.example.myapplication;
+package com.example.myapplication.models;
+
+import com.example.myapplication.models.Actor;
+import com.example.myapplication.models.Movie;
 
 public class MoviesActorsEntry {
 

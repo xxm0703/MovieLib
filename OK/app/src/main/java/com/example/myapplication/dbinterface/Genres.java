@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.dbinterface;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -8,6 +8,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.os.Build;
 import android.util.Log;
+
+import com.example.myapplication.Config;
+import com.example.myapplication.models.Genre;
 
 import java.util.ArrayList;
 import java.util.List;

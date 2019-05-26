@@ -9,23 +9,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HomeActivity"> </activity>
-        <activity android:name=".RegisterActivity"> </activity>
-        <activity android:name=".ChangePasswordActivity"> </activity>
-        <activity android:name=".DeleteAccountActivity"> </activity>
-        <activity android:name=".DeleteGenreActivity"> </activity>
-        <activity android:name=".AddGenreActivity"> </activity>
-        <activity android:name=".GenreActivity"> </activity>
-        <activity android:name=".DeleteActorActivity"> </activity>
-        <activity android:name=".AddActorActivity"> </activity>
-        <activity android:name=".ActorActivity"> </activity>
+        <activity android:name=".activities.HomeActivity"> </activity>
+        <activity android:name=".activities.RegisterActivity"> </activity>
+        <activity android:name=".activities.ChangePasswordActivity"> </activity>
+        <activity android:name=".activities.DeleteAccountActivity"> </activity>
+        <activity android:name=".activities.DeleteGenreActivity"> </activity>
+        <activity android:name=".activities.AddGenreActivity"> </activity>
+        <activity android:name=".activities.GenreActivity"> </activity>
+        <activity android:name=".activities.DeleteActorActivity"> </activity>
+        <activity android:name=".activities.AddActorActivity"> </activity>
+        <activity android:name=".activities.ActorActivity"> </activity>
     </application>
 
 </manifest>

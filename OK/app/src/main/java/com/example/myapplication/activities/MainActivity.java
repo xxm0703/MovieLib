@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.activities;
 
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.myapplication.R;
+import com.example.myapplication.dbinterface.Users;
+import com.example.myapplication.models.User;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.dbinterface;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
+
+import com.example.myapplication.Config;
+import com.example.myapplication.models.User;
 
 public class Users extends SQLiteOpenHelper {
     public static final String TABLE_NAME = "users";

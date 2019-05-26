@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.myapplication.R;
+import com.example.myapplication.dbinterface.Genres;
+import com.example.myapplication.models.Genre;
 
 public class DeleteGenreActivity extends AppCompatActivity {
     Genres db;

@@ -15,10 +15,8 @@ import java.util.List;
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class Movies extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "movie_lib.db";
-
     public Movies(Context context) {
-        super(context, DATABASE_NAME, null, 2);
+        super(context, Config.DATABASE_NAME, null, Config.DATABASE_VERSION);
     }
 
     @Override

@@ -14,17 +14,15 @@ import java.util.List;
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class Actors extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "movie_lib.db";
-
     public Actors(Context context) {
-        super(context, DATABASE_NAME, null, 2);
+        super(context, Config.DATABASE_NAME, null, Config.DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE actors(" +
                 "ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
-                "name TEXT UNIQUE NOT NULL," +
+                "name TEXT NOT NULL," +
                 "age INTEGER NOT NULL" +
                 ");");
     }

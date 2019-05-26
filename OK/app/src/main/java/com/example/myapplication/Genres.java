@@ -38,9 +38,10 @@ public class Genres extends SQLiteOpenHelper {
             return;
 
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(COL_2, genre.getName());
-        db.insert(TABLE_NAME, null, values);
+
+        SQLiteStatement stmt = db.compileStatement("INSERT INTO genres(name) VALUES(?)");
+        stmt.bindString(1, genre.getName());
+        stmt.execute();
     }
 
     public void removeGenre(Genre genre) {
@@ -91,14 +92,7 @@ public class Genres extends SQLiteOpenHelper {
     }
 
     private boolean exists(Genre genre) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_NAME,
-                new String[]{COL_1, COL_2},
-                COL_2 + "=?",
-                new String[]{genre.getName()},
-                null, null, null);
-
-        return cursor != null && cursor.moveToFirst() && cursor.getCount() > 0;
+        return findByName(genre.getName()) != null;
     }
 
 }

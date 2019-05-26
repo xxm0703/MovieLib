@@ -1,8 +1,11 @@
 package com.example.myapplication;
 
 public class Actor {
-    private final int id;
-    private final String name;
+
+    private int id;
+
+    private String name;
+
     private int age;
 
     public Actor(int id, String name, int age) {
@@ -11,8 +14,17 @@ public class Actor {
         this.age = age;
     }
 
+    public Actor(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

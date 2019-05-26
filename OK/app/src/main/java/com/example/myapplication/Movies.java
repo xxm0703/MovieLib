@@ -33,6 +33,7 @@ public class Movies extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS movies");
+        onCreate(db);
     }
 
     public boolean add(Movie movie) {
@@ -71,7 +72,7 @@ public class Movies extends SQLiteOpenHelper {
     public boolean delete(Movie movie) {
         SQLiteDatabase db = this.getWritableDatabase();
         SQLiteStatement stmt = db.compileStatement("DELETE FROM movies " +
-                "WHERE id = ?");
+                "WHERE ID = ?");
 
         stmt.bindLong(1, movie.getId());
         return stmt.executeUpdateDelete() > 0;
@@ -80,7 +81,8 @@ public class Movies extends SQLiteOpenHelper {
     public Movie findById(int id) {
         String[] cols = new String[]{ String.valueOf(id) };
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM movies WHERE id = ?", cols);
+        Cursor cursor = db.rawQuery("SELECT * FROM movies " +
+                "WHERE ID = ?", cols);
         Movie movie = null;
 
         if (cursor != null) {
@@ -97,7 +99,8 @@ public class Movies extends SQLiteOpenHelper {
     public Movie findByName(String name) {
         String[] cols = new String[]{ name };
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM movies WHERE name = ?", cols);
+        Cursor cursor = db.rawQuery("SELECT * FROM movies " +
+                "WHERE name = ?", cols);
         Movie movie = null;
 
         if (cursor != null) {
@@ -133,6 +136,6 @@ public class Movies extends SQLiteOpenHelper {
     }
 
     private boolean exists(Movie movie) {
-        return findByName(movie.getName()) != null;
+        return findById(movie.getId()) != null || findByName(movie.getName()) != null;
     }
 }

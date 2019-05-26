@@ -20,24 +20,31 @@ public class Actors extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE actors(" +
+        db.execSQL("CREATE TABLE IF NOT EXISTS actors(" +
                 "ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
-                "name TEXT NOT NULL," +
+                "name TEXT UNIQUE NOT NULL," +
                 "age INTEGER NOT NULL" +
                 ");");
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(" DROP TABLE IF EXISTS actors");
+    public void onOpen(SQLiteDatabase db) {
         onCreate(db);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        if (newVersion > oldVersion) {
+            db.execSQL(" DROP TABLE IF EXISTS actors;");
+            onCreate(db);
+        }
     }
 
     public boolean add(Actor actor) {
         if (!exists(actor)) {
             SQLiteDatabase db = this.getWritableDatabase();
-            SQLiteStatement stmt = db.compileStatement("INSERT INTO actor(name, age) " +
-                    "VALUES(?, ?)");
+            SQLiteStatement stmt = db.compileStatement("INSERT INTO actors(name, age) " +
+                    "VALUES(?, ?);");
             int id;
 
             stmt.bindString(1, actor.getName());
@@ -59,7 +66,7 @@ public class Actors extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         SQLiteStatement stmt = db.compileStatement("UPDATE actors " +
                 "SET name = ?, age = ? " +
-                "WHERE ID = ?");
+                "WHERE ID = ?;");
         stmt.bindString(1, actor.getName());
         stmt.bindLong(2, actor.getAge());
         stmt.bindLong(3, actor.getId());
@@ -69,7 +76,7 @@ public class Actors extends SQLiteOpenHelper {
     public boolean delete(Actor actor) {
         SQLiteDatabase db = this.getWritableDatabase();
         SQLiteStatement stmt = db.compileStatement("DELETE FROM actors " +
-                "WHERE ID = ?");
+                "WHERE ID = ?;");
 
         stmt.bindLong(1, actor.getId());
         return stmt.executeUpdateDelete() > 0;
@@ -79,7 +86,7 @@ public class Actors extends SQLiteOpenHelper {
         String[] cols = new String[]{ String.valueOf(id) };
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor mCursor = db.rawQuery("SELECT * FROM actors " +
-                "WHERE ID = ?", cols);
+                "WHERE ID = ?;", cols);
         Actor actor = null;
 
         if (mCursor != null) {
@@ -97,7 +104,7 @@ public class Actors extends SQLiteOpenHelper {
         String[] cols = new String[]{ name };
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor mCursor = db.rawQuery("SELECT * FROM actors " +
-                "WHERE name = ?", cols);
+                "WHERE name = ?;", cols);
         Actor actor = null;
 
         if (mCursor != null) {
@@ -113,7 +120,7 @@ public class Actors extends SQLiteOpenHelper {
 
     public List<Actor> extractActors() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor mCursor = db.rawQuery("SELECT * FROM actors", null);
+        Cursor mCursor = db.rawQuery("SELECT * FROM actors;", null);
         List<Actor> actors = null;
 
         if (mCursor != null) {

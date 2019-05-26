@@ -21,7 +21,7 @@ public class Movies extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE movies(" +
+        db.execSQL("CREATE TABLE IF NOT EXISTS movies(" +
                 "ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
                 "name TEXT UNIQUE NOT NULL," +
                 "release_date DATE NOT NULL" +
@@ -29,16 +29,23 @@ public class Movies extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS movies");
+    public void onOpen(SQLiteDatabase db) {
         onCreate(db);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        if (newVersion > oldVersion) {
+            db.execSQL("DROP TABLE IF EXISTS movies;");
+            onCreate(db);
+        }
     }
 
     public boolean add(Movie movie) {
         if (!exists(movie)) {
             SQLiteDatabase db = this.getWritableDatabase();
             SQLiteStatement stmt = db.compileStatement("INSERT INTO movies(name, release_date) " +
-                    "VALUES(?, ?)");
+                    "VALUES(?, ?);");
             int id;
 
             stmt.bindString(1, movie.getName());
@@ -60,7 +67,7 @@ public class Movies extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         SQLiteStatement stmt = db.compileStatement("UPDATE movies " +
                 "SET name = ?, release_date = ? " +
-                "WHERE ID = ?");
+                "WHERE ID = ?;");
         stmt.bindString(1, movie.getName());
         stmt.bindString(2, movie.getReleaseDate().toString());
         stmt.bindLong(3, movie.getId());
@@ -70,7 +77,7 @@ public class Movies extends SQLiteOpenHelper {
     public boolean delete(Movie movie) {
         SQLiteDatabase db = this.getWritableDatabase();
         SQLiteStatement stmt = db.compileStatement("DELETE FROM movies " +
-                "WHERE ID = ?");
+                "WHERE ID = ?;");
 
         stmt.bindLong(1, movie.getId());
         return stmt.executeUpdateDelete() > 0;
@@ -98,7 +105,7 @@ public class Movies extends SQLiteOpenHelper {
         String[] cols = new String[]{ name };
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM movies " +
-                "WHERE name = ?", cols);
+                "WHERE name = ?;", cols);
         Movie movie = null;
 
         if (cursor != null) {
@@ -114,7 +121,7 @@ public class Movies extends SQLiteOpenHelper {
 
     public List<Movie> extractMovies() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM movies", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM movies;", null);
         List<Movie> movies = null;
 
         if (cursor != null) {

@@ -20,7 +20,7 @@ public class MoviesActors extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE movies_actors(" +
+        db.execSQL("CREATE TABLE IF NOT EXISTS movies_actors(" +
                 "ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "movie_id INTEGER NOT NULL," +
                 "actor_id INTEGER NOT NULL," +
@@ -31,16 +31,23 @@ public class MoviesActors extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS movies_actors");
+    public void onOpen(SQLiteDatabase db) {
         onCreate(db);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        if (newVersion > oldVersion) {
+            db.execSQL("DROP TABLE IF EXISTS movies_actors;");
+            onCreate(db);
+        }
     }
 
     public boolean add(MoviesActorsEntry entry) {
         if (!exists(entry)) {
             SQLiteDatabase db = this.getWritableDatabase();
             SQLiteStatement stmt = db.compileStatement("INSERT INTO movies_actors " +
-                    "VALUES(?, ?)");
+                    "VALUES(?, ?);");
             int id;
 
             stmt.bindLong(1, entry.getMovieId());
@@ -57,7 +64,7 @@ public class MoviesActors extends SQLiteOpenHelper {
     public boolean delete(MoviesActorsEntry entry) {
         SQLiteDatabase db = this.getWritableDatabase();
         SQLiteStatement stmt = db.compileStatement("DELETE FROM movies_actors " +
-                "WHERE ID = ?");
+                "WHERE ID = ?;");
 
         stmt.bindLong(1, entry.getId());
         return stmt.executeUpdateDelete() > 0;
@@ -67,7 +74,7 @@ public class MoviesActors extends SQLiteOpenHelper {
         String[] cols = new String[]{ String.valueOf(id) };
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM movies_actors " +
-                "WHERE ID = ?", cols);
+                "WHERE ID = ?;", cols);
         MoviesActorsEntry entry = null;
 
         if (cursor != null) {
@@ -86,7 +93,7 @@ public class MoviesActors extends SQLiteOpenHelper {
         String[] cols = new String[]{ String.valueOf(movieId), String.valueOf(actorId) };
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM movies_actors " +
-                "WHERE movie_id = ? AND actor_id = ?", cols);
+                "WHERE movie_id = ? AND actor_id = ?;", cols);
         MoviesActorsEntry entry = null;
 
         if (cursor != null) {
@@ -108,7 +115,7 @@ public class MoviesActors extends SQLiteOpenHelper {
         String[] cols = new String[]{ String.valueOf(movieId) };
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM movies_actors " +
-                "WHERE movie_id = ?", cols);
+                "WHERE movie_id = ?;", cols);
         List<MoviesActorsEntry> entries = null;
 
         if (cursor != null) {
@@ -134,7 +141,7 @@ public class MoviesActors extends SQLiteOpenHelper {
         String[] cols = new String[]{ String.valueOf(actorId) };
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM movies_actors " +
-                "WHERE actor_id = ?", cols);
+                "WHERE actor_id = ?;", cols);
         List<MoviesActorsEntry> entries = null;
 
         if (cursor != null) {

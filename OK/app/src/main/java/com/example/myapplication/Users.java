@@ -20,13 +20,24 @@ public class Users extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(String.format("CREATE TABLE %s (email Text PRIMARY, password Text, name Text)", TABLE_NAME));
+        db.execSQL("CREATE TABLE IF NOT EXISTS users(" +
+                "email TEXT PRIMARY KEY NOT NULL, " +
+                "password TEXT NOT NULL, " +
+                "name TEXT" +
+                ");");
+    }
+
+    @Override
+    public void onOpen(SQLiteDatabase db) {
+        onCreate(db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(" DROP TABLE IF EXISTS " + TABLE_NAME);
-        onCreate(db);
+        if (newVersion > oldVersion) {
+            db.execSQL(" DROP TABLE IF EXISTS users;");
+            onCreate(db);
+        }
     }
 
     public void addUser(User user) {

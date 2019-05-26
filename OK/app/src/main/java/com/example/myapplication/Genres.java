@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.os.Build;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,23 +21,31 @@ public class Genres extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE genres(" +
+        db.execSQL("CREATE TABLE IF NOT EXISTS genres(" +
                 "ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "name TEXT UNIQUE NOT NULL" +
                 ");");
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(" DROP TABLE IF EXISTS genres");
+    public void onOpen(SQLiteDatabase db) {
         onCreate(db);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        if (newVersion > oldVersion) {
+            Log.println(1, "Genres", "DROPPING");
+            db.execSQL(" DROP TABLE IF EXISTS genres;");
+            onCreate(db);
+        }
     }
 
     public boolean add(Genre genre) {
         if (!exists(genre)) {
             SQLiteDatabase db = this.getWritableDatabase();
             SQLiteStatement stmt = db.compileStatement("INSERT INTO genres(name) " +
-                    "VALUES(?)");
+                    "VALUES(?);");
             int id;
 
             stmt.bindString(1, genre.getName());
@@ -52,7 +61,7 @@ public class Genres extends SQLiteOpenHelper {
     public boolean delete(Genre genre) {
         SQLiteDatabase db = this.getWritableDatabase();
         SQLiteStatement stmt = db.compileStatement("DELETE FROM genres " +
-                "WHERE ID = ?");
+                "WHERE ID = ?;");
 
         stmt.bindLong(1, genre.getId());
         return stmt.executeUpdateDelete() > 0;
@@ -62,7 +71,7 @@ public class Genres extends SQLiteOpenHelper {
         String[] cols = new String[]{ String.valueOf(id) };
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor mCursor = db.rawQuery("SELECT * FROM genres " +
-                "WHERE ID = ?", cols);
+                "WHERE ID = ?;", cols);
         Genre genre = null;
 
         if (mCursor != null){
@@ -79,7 +88,7 @@ public class Genres extends SQLiteOpenHelper {
         String[] cols = new String[]{ name };
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor mCursor = db.rawQuery("SELECT * FROM genres " +
-                "WHERE name = ?", cols);
+                "WHERE name = ?;", cols);
         Genre genre = null;
 
         if (mCursor != null){
@@ -94,7 +103,7 @@ public class Genres extends SQLiteOpenHelper {
 
     public List<Genre> extractGenres() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor mCursor = db.rawQuery("SELECT * FROM genres", null);
+        Cursor mCursor = db.rawQuery("SELECT * FROM genres;", null);
         List<Genre> genres = null;
 
         if (mCursor != null){

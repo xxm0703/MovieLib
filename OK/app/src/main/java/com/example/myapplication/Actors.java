@@ -1,5 +1,9 @@
 package com.example.myapplication;
 
+<<<<<<< HEAD
+=======
+import android.content.ContentValues;
+>>>>>>> origin/master
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -35,8 +39,13 @@ public class Actors extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         SQLiteStatement stmt = db.compileStatement("INSERT INTO actor(name, age) VALUES(?, ?)");
+<<<<<<< HEAD
         stmt.bindString(1, actor.getName());
         stmt.bindLong(2, actor.getAge());
+=======
+        stmt.bindString(0, actor.getName());
+        stmt.bindLong(1, actor.getAge());
+>>>>>>> origin/master
         stmt.execute();
     }
 
@@ -68,8 +77,13 @@ public class Actors extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         SQLiteStatement stmt = db.compileStatement("UPDATE actors SET age=? WHERE ID=?");
+<<<<<<< HEAD
         stmt.bindLong(1, actor.getAge() + 1);
         stmt.bindLong(2, actor.getId());
+=======
+        stmt.bindLong(0, actor.getAge() + 1);
+        stmt.bindLong(1, actor.getId());
+>>>>>>> origin/master
         return stmt.executeUpdateDelete() != 0;
     }
 
@@ -98,4 +112,9 @@ public class Actors extends SQLiteOpenHelper {
     private boolean exists(Actor actor) {
         return findByName(actor.getName()) != null;
     }
+<<<<<<< HEAD
 }
+=======
+
+}
+>>>>>>> origin/master

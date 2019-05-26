@@ -1,17 +1,16 @@
 package com.example.myapplication;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.database.sqlite.SQLiteStatement;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Genres extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "movie_lib.db";
     public static final String TABLE_NAME = "genres";
+    public static final String COL_1 = "ID";
+    public static final String COL_2 = "name";
 
 
     public Genres(Context context) {
@@ -34,61 +33,20 @@ public class Genres extends SQLiteOpenHelper {
             return;
 
         SQLiteDatabase db = this.getWritableDatabase();
-
-        SQLiteStatement stmt = db.compileStatement("INSERT INTO genres(name) VALUES(?)");
-        stmt.bindString(1, genre.getName());
-        stmt.execute();
-    }
-
-    public void removeGenre(Genre genre) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        SQLiteStatement stmt = db.compileStatement("DELETE FROM genres WHERE name = ?");
-        stmt.bindString(1, genre.getName());
-        stmt.execute();
-    }
-
-    public Genre findByName(String name) {
-        String[] cols = new String[]{name};
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor mCursor = db.rawQuery("SELECT * FROM genres WHERE name = ?", cols);
-
-        Genre genre = null;
-
-        if (mCursor != null){
-            if (mCursor.moveToFirst()) {
-                int id = mCursor.getInt(0);
-                genre = new Genre(id, name);
-            }
-            mCursor.close();
-        }
-
-        return genre;
-    }
-
-    public List<Genre> extractGenres() {
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor mCursor = db.rawQuery("SELECT * FROM genres", null);
-
-        ArrayList<Genre> genres = null;
-        if (mCursor != null){
-            if (mCursor.moveToFirst()) {
-                genres = new ArrayList<>();
-                do {
-                    int column1 = mCursor.getInt(0);
-                    String column2 = mCursor.getString(1);
-                    genres.add(new Genre(column1, column2));
-                } while (mCursor.moveToNext());
-            }
-            mCursor.close();
-        }
-
-        return genres;
+        ContentValues values = new ContentValues();
+        values.put(COL_2, genre.getName());
+        db.insert(TABLE_NAME, null, values);
     }
 
     private boolean exists(Genre genre) {
-        return findByName(genre.getName()) != null;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_NAME,
+                new String[]{COL_1, COL_2},
+                COL_2 + "=?",
+                new String[]{genre.getName()},
+                null, null, null);
+
+        return cursor != null && cursor.moveToFirst()&& cursor.getCount() > 0;
     }
 
 }

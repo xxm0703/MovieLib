@@ -22,4 +22,8 @@ public class Actor {
     public int getAge() {
         return age;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/master

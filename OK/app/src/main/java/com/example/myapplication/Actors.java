@@ -17,7 +17,7 @@ public class Actors extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "movie_lib.db";
 
     public Actors(Context context) {
-        super(context, DATABASE_NAME, null, 1);
+        super(context, DATABASE_NAME, null, 2);
     }
 
     @Override

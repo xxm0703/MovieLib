@@ -17,7 +17,7 @@ public class Genres extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "movie_lib.db";
 
     public Genres(Context context) {
-        super(context, DATABASE_NAME, null, 1);
+        super(context, DATABASE_NAME, null, 2);
     }
 
     @Override

@@ -5,6 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
+
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Genres extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "movie_lib.db";
@@ -38,6 +43,53 @@ public class Genres extends SQLiteOpenHelper {
         db.insert(TABLE_NAME, null, values);
     }
 
+    public void removeGenre(Genre genre) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteStatement stmt = db.compileStatement("DELETE FROM genres WHERE name = ?");
+        stmt.bindString(1, genre.getName());
+        stmt.execute();
+    }
+
+    public Genre findByName(String name) {
+        String[] cols = new String[]{name};
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor mCursor = db.rawQuery("SELECT * FROM genres WHERE name = ?", cols);
+
+        Genre genre = null;
+
+        if (mCursor != null){
+            if (mCursor.moveToFirst()) {
+                int id = mCursor.getInt(0);
+                genre = new Genre(id, name);
+            }
+            mCursor.close();
+        }
+
+        return genre;
+    }
+
+    public List<Genre> extractGenres() {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor mCursor = db.rawQuery("SELECT * FROM genres", null);
+
+        ArrayList<Genre> genres = null;
+        if (mCursor != null){
+            if (mCursor.moveToFirst()) {
+                genres = new ArrayList<>();
+                do {
+                    int column1 = mCursor.getInt(0);
+                    String column2 = mCursor.getString(1);
+                    genres.add(new Genre(column1, column2));
+                } while (mCursor.moveToNext());
+            }
+            mCursor.close();
+        }
+
+        return genres;
+    }
+
     private boolean exists(Genre genre) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_NAME,
@@ -46,7 +98,7 @@ public class Genres extends SQLiteOpenHelper {
                 new String[]{genre.getName()},
                 null, null, null);
 
-        return cursor != null && cursor.moveToFirst()&& cursor.getCount() > 0;
+        return cursor != null && cursor.moveToFirst() && cursor.getCount() > 0;
     }
 
 }

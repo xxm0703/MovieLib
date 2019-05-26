@@ -14,8 +14,6 @@ import java.util.List;
 public class Genres extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "movie_lib.db";
     public static final String TABLE_NAME = "genres";
-    public static final String COL_1 = "ID";
-    public static final String COL_2 = "name";
 
 
     public Genres(Context context) {
@@ -40,14 +38,14 @@ public class Genres extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         SQLiteStatement stmt = db.compileStatement("INSERT INTO genres(name) VALUES(?)");
-        stmt.bindString(1, genre.getName());
+        stmt.bindString(0, genre.getName());
         stmt.execute();
     }
 
     public void removeGenre(Genre genre) {
         SQLiteDatabase db = this.getWritableDatabase();
         SQLiteStatement stmt = db.compileStatement("DELETE FROM genres WHERE name = ?");
-        stmt.bindString(1, genre.getName());
+        stmt.bindString(0, genre.getName());
         stmt.execute();
     }
 

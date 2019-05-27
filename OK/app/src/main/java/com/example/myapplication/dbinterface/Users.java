@@ -33,6 +33,7 @@ public class Users extends SQLiteOpenHelper {
     @Override
     public void onOpen(SQLiteDatabase db) {
         onCreate(db);
+        super.onOpen(db);
     }
 
     @Override

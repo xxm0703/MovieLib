@@ -22,6 +22,13 @@ public class Cassete {
         this.borrowerId = borrowerId;
     }
 
+    public Cassete(int movieId, Date borrowDate, Date returnDate, Integer borrowerId) {
+        this.movieId = movieId;
+        this.borrowDate = borrowDate;
+        this.returnDate = returnDate;
+        this.borrowerId = borrowerId;
+    }
+
     public int getId() {
         return id;
     }

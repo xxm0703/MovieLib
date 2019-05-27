@@ -90,13 +90,14 @@ public class Movies extends SQLiteOpenHelper {
         String[] cols = new String[]{ String.valueOf(id) };
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM movies " +
-                "WHERE ID = ?", cols);
+                "WHERE ID = ?;", cols);
         Movie movie = null;
 
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 String name = cursor.getString(1);
                 Date release_date = new Date(cursor.getString(2));
+
                 movie = new Movie(id, name, release_date);
             }
             cursor.close();

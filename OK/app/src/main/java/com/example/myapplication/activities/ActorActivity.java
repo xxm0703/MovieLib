@@ -11,6 +11,7 @@ import com.example.myapplication.R;
 public class ActorActivity extends AppCompatActivity {
     Button mButtonAdd;
     Button mButtonDelete;
+    Button mButtonAllActors;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,7 @@ public class ActorActivity extends AppCompatActivity {
 
         mButtonAdd = findViewById(R.id.button_add_actor);
         mButtonDelete = findViewById(R.id.button_delete_actor);
+        mButtonAllActors = (Button) findViewById(R.id.button_see_all_actors);
 
         mButtonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,6 +33,13 @@ public class ActorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ActorActivity.this, DeleteActorActivity.class);
+                startActivity(intent);
+            }
+        });
+        mButtonAllActors.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActorActivity.this, AllActorsActivity.class);
                 startActivity(intent);
             }
         });

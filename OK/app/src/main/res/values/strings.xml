@@ -31,4 +31,6 @@
     <string name="add_actor">Add Actor</string>
     <string name="actor_name">Actor Name</string>
     <string name="actor_age">Actor Age</string>
+    <string name="see_all_genres">See All Genres</string>
+    <string name="see_all_actors">See All Actors</string>
 </resources>

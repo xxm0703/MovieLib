@@ -26,6 +26,8 @@
         <activity android:name=".activities.DeleteActorActivity"> </activity>
         <activity android:name=".activities.AddActorActivity"> </activity>
         <activity android:name=".activities.ActorActivity"> </activity>
+        <activity android:name=".activities.AllGenresActivity"> </activity>
+        <activity android:name=".activities.AllActorsActivity"> </activity>
     </application>
 
 </manifest>

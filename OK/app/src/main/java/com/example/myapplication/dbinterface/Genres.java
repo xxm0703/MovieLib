@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.os.Build;
-import android.util.Log;
 
 import com.example.myapplication.Config;
 import com.example.myapplication.models.Genre;
@@ -104,24 +103,25 @@ public class Genres extends SQLiteOpenHelper {
         return genre;
     }
 
-    public List<Genre> extractGenres() {
+    public ArrayList<String> extractGenresInformation() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor mCursor = db.rawQuery("SELECT * FROM genres;", null);
-        List<Genre> genres = null;
+        ArrayList<String> all_genres = null;
 
         if (mCursor != null){
             if (mCursor.moveToFirst()) {
-                genres = new ArrayList<>(mCursor.getCount());
+                all_genres = new ArrayList<>();
                 do {
-                    int id = mCursor.getInt(0);
                     String name = mCursor.getString(1);
-                    genres.add(new Genre(id, name));
+                    all_genres.add(name);
                 } while (mCursor.moveToNext());
             }
+
             mCursor.close();
         }
-        return genres;
+        return all_genres;
     }
+
     private boolean exists(Genre genre) {
         return findById(genre.getId()) != null || findByName(genre.getName()) != null;
     }

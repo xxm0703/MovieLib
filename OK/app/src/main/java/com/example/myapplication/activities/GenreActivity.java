@@ -11,6 +11,7 @@ import com.example.myapplication.R;
 public class GenreActivity extends AppCompatActivity {
     Button mButtonAdd;
     Button mButtonDelete;
+    Button mButtonSeeAll;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,7 @@ public class GenreActivity extends AppCompatActivity {
 
         mButtonAdd = findViewById(R.id.button_add_genre);
         mButtonDelete = findViewById(R.id.button_delete_genre);
+        mButtonSeeAll = findViewById(R.id.button_see_all_genres);
 
         mButtonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,6 +33,13 @@ public class GenreActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(GenreActivity.this, DeleteGenreActivity.class);
+                startActivity(intent);
+            }
+        });
+        mButtonSeeAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GenreActivity.this, AllGenresActivity.class);
                 startActivity(intent);
             }
         });

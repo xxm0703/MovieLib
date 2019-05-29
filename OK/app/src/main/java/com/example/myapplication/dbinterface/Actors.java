@@ -126,24 +126,25 @@ public class Actors extends SQLiteOpenHelper {
     }
 
 
-    public List<Actor> extractActors() {
+    public ArrayList<String> extractActorsInformation() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor mCursor = db.rawQuery("SELECT * FROM actors;", null);
-        List<Actor> actors = null;
+        ArrayList<String> arrayList = null;
 
         if (mCursor != null) {
             if (mCursor.moveToFirst()) {
-                actors = new ArrayList<>(mCursor.getCount());
+                arrayList = new ArrayList<>();
                 do {
-                    int id = mCursor.getInt(0);
                     String name = mCursor.getString(1);
-                    int age = mCursor.getInt(2);
-                    actors.add(new Actor(id, name, age));
+                    String age = mCursor.getString(2);
+                    String temp = name.concat(" ,");
+                    String information = temp.concat(age);
+                    arrayList.add(information);
                 } while (mCursor.moveToNext());
             }
             mCursor.close();
         }
-        return actors;
+        return arrayList;
     }
 
     private boolean exists(Actor actor) {

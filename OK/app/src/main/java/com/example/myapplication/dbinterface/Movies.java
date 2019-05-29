@@ -63,7 +63,7 @@ public class Movies extends SQLiteOpenHelper {
         return false;
     }
 
-    public boolean update(Movie movie) {
+    public boolean update(Movie movie, String name, Date releaseDate) {
         if (!exists(movie)) {
             return false;
         }
@@ -72,8 +72,8 @@ public class Movies extends SQLiteOpenHelper {
         SQLiteStatement stmt = db.compileStatement("UPDATE movies " +
                 "SET name = ?, release_date = ? " +
                 "WHERE ID = ?;");
-        stmt.bindString(1, movie.getName());
-        stmt.bindString(2, movie.getReleaseDate().toString());
+        stmt.bindString(1, name);
+        stmt.bindString(2, releaseDate.toString());
         stmt.bindLong(3, movie.getId());
         return stmt.executeUpdateDelete() > 0;
     }
@@ -84,6 +84,7 @@ public class Movies extends SQLiteOpenHelper {
                 "WHERE ID = ?;");
 
         stmt.bindLong(1, movie.getId());
+
         return stmt.executeUpdateDelete() > 0;
     }
 

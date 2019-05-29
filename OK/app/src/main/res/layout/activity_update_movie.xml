@@ -14,6 +14,20 @@
         android:orientation="vertical">
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/textInputLayoutName1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:errorEnabled="true">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/movie_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/movie_name"
+                android:inputType="textPersonName" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
             android:id="@+id/textInputLayoutName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,7 +35,7 @@
             app:errorEnabled="true">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/add_movie_name"
+                android:id="@+id/new_movie_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/new_movie_name"
@@ -36,12 +50,28 @@
             app:errorEnabled="true">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/add_movie_date"
+                android:id="@+id/movie_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/movie_date"
+                android:inputType="date" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textInputLayoutNewDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:errorEnabled="true">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/new_movie_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/new_movie_date"
                 android:inputType="date" />
         </android.support.design.widget.TextInputLayout>
+
 
         <Button
             android:id="@+id/button_update_movie"

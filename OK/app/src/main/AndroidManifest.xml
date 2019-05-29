@@ -28,6 +28,10 @@
         <activity android:name=".activities.ActorActivity"> </activity>
         <activity android:name=".activities.AllGenresActivity"> </activity>
         <activity android:name=".activities.AllActorsActivity"> </activity>
+        <activity android:name=".activities.MovieActivity"> </activity>
+        <activity android:name=".activities.AddMovieActivity"> </activity>
+        <activity android:name=".activities.DeleteMovieActivity"> </activity>
+        <activity android:name=".activities.UpdateMovieActivity"> </activity>
     </application>
 
 </manifest>

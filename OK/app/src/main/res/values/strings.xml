@@ -33,4 +33,12 @@
     <string name="actor_age">Actor Age</string>
     <string name="see_all_genres">See All Genres</string>
     <string name="see_all_actors">See All Actors</string>
+    <string name="see_all_movies">See All Movies</string>
+    <string name="add_movie">Add Movie</string>
+    <string name="delete_movie">Delete Movie</string>
+    <string name="update_movie">Update Movie</string>
+    <string name="movie_name">Name</string>
+    <string name="movie_date">Release Date</string>
+    <string name="new_movie_name">New Name</string>
+    <string name="new_movie_date">New Release Date</string>
 </resources>

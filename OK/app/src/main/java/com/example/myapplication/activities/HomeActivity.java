@@ -41,6 +41,10 @@ public class HomeActivity extends AppCompatActivity {
                     Intent toGenres = new Intent(HomeActivity.this, ActorActivity.class);
                     startActivity(toGenres);
                 }
+                if(id == R.id.movies) {
+                    Intent toMovies = new Intent(HomeActivity.this, MovieActivity.class);
+                    startActivity(toMovies);
+                }
                 return true;
             }
         });

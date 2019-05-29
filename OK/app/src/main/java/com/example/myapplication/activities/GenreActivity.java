@@ -17,8 +17,8 @@ public class GenreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_genre);
 
-        mButtonAdd = (Button) findViewById(R.id.button_add_genre);
-        mButtonDelete = (Button) findViewById(R.id.button_delete_genre);
+        mButtonAdd = findViewById(R.id.button_add_genre);
+        mButtonDelete = findViewById(R.id.button_delete_genre);
 
         mButtonAdd.setOnClickListener(new View.OnClickListener() {
             @Override

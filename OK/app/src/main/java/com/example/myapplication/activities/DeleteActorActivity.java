@@ -23,8 +23,8 @@ public class DeleteActorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_delete_actor);
 
         db = new Actors(this);
-        mButtonDeleteActor = (Button) findViewById(R.id.button_delete_actor);
-        mEditTextActor = (EditText) findViewById(R.id.delete_actor);
+        mButtonDeleteActor = findViewById(R.id.button_delete_actor);
+        mEditTextActor = findViewById(R.id.delete_actor);
 
         mButtonDeleteActor.setOnClickListener(new View.OnClickListener() {
             @Override

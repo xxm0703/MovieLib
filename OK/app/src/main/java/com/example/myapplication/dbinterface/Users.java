@@ -78,10 +78,7 @@ public class Users extends SQLiteOpenHelper {
                 new String[]{email},
                 null, null, null);
 
-        if (cursor != null && cursor.moveToFirst()&& cursor.getCount()>0) {
-            return true;
-        }
-        return false;
+        return cursor != null && cursor.moveToFirst() && cursor.getCount() > 0;
 
     }
 

@@ -23,8 +23,8 @@ public class DeleteGenreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_delete_genre);
 
         db = new Genres(this);
-        mButtonDeleteGenre = (Button) findViewById(R.id.button_delete_genre1);
-        mEditTextGenre = (EditText) findViewById(R.id.delete_genre);
+        mButtonDeleteGenre = findViewById(R.id.button_delete_genre1);
+        mEditTextGenre = findViewById(R.id.delete_genre);
 
         mButtonDeleteGenre.setOnClickListener(new View.OnClickListener() {
             @Override

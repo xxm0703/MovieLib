@@ -25,10 +25,10 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
         db = new Users(this);
 
-        mEditTextChangeEmail = (EditText) findViewById(R.id.change_email);
-        mEditTextChangeName = (EditText) findViewById(R.id.change_name);
-        mEditTextChangePassword = (EditText) findViewById(R.id.change_password);
-        mButtonUpdate = (Button) findViewById(R.id.button_change_information);
+        mEditTextChangeEmail = findViewById(R.id.change_email);
+        mEditTextChangeName = findViewById(R.id.change_name);
+        mEditTextChangePassword = findViewById(R.id.change_password);
+        mButtonUpdate = findViewById(R.id.button_change_information);
 
         mButtonUpdate.setOnClickListener(new View.OnClickListener() {
             @Override

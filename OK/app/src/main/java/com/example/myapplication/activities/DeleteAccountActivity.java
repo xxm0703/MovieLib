@@ -22,8 +22,8 @@ public class DeleteAccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_delete);
         db = new Users(this);
 
-        mEditTextDeleteAccount = (EditText) findViewById(R.id.delete_email);
-        mButtonDeleteAccount = (Button) findViewById(R.id.button_delete);
+        mEditTextDeleteAccount = findViewById(R.id.delete_email);
+        mButtonDeleteAccount = findViewById(R.id.button_delete);
 
         mButtonDeleteAccount.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -17,8 +17,8 @@ public class ActorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actor);
 
-        mButtonAdd = (Button) findViewById(R.id.button_add_actor);
-        mButtonDelete = (Button) findViewById(R.id.button_delete_actor);
+        mButtonAdd = findViewById(R.id.button_add_actor);
+        mButtonDelete = findViewById(R.id.button_delete_actor);
 
         mButtonAdd.setOnClickListener(new View.OnClickListener() {
             @Override

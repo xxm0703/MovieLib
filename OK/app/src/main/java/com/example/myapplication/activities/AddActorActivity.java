@@ -23,16 +23,16 @@ public class AddActorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_actor);
 
         db = new Actors(this);
-        mEditTextActorName = (EditText) findViewById(R.id.add_actor_name);
-        mEditTextActorAge = (EditText) findViewById(R.id.add_actor_age);
-        mButtonAddGenre = (Button) findViewById(R.id.button_add_actor);
+        mEditTextActorName = findViewById(R.id.add_actor_name);
+        mEditTextActorAge = findViewById(R.id.add_actor_age);
+        mButtonAddGenre = findViewById(R.id.button_add_actor);
 
         mButtonAddGenre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String name = mEditTextActorName.getText().toString();
                 String s_age = mEditTextActorAge.getText().toString();
-                int age = 0;
+                int age;
                 try {
                     age = Integer.parseInt(s_age);
                 } catch(NumberFormatException e) {

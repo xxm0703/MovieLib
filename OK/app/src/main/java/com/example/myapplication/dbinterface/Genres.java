@@ -39,7 +39,6 @@ public class Genres extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (newVersion > oldVersion) {
-            Log.println(1, "Genres", "DROPPING");
             db.execSQL(" DROP TABLE IF EXISTS genres;");
             onCreate(db);
         }

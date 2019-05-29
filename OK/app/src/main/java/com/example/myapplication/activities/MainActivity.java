@@ -28,11 +28,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         db = new Users(this);
-        mTextEmail = (EditText) findViewById(R.id.email);
-        mTextPassword = (EditText) findViewById(R.id.password);
-        mTextName = (EditText) findViewById(R.id.name);
-        mButtonLogin = (Button) findViewById(R.id.button_login);
-        mTextViewRegister = (TextView) findViewById(R.id.textview_register);
+        mTextEmail = findViewById(R.id.email);
+        mTextPassword = findViewById(R.id.password);
+        mTextName = findViewById(R.id.name);
+        mButtonLogin = findViewById(R.id.button_login);
+        mTextViewRegister = findViewById(R.id.textview_register);
 
         mTextViewRegister.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -22,8 +22,8 @@ public class AddGenreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_genre);
 
         db = new Genres(this);
-        mEditTextGenre = (EditText) findViewById(R.id.add_genre);
-        mButtonAddGenre = (Button) findViewById(R.id.button_add_genre);
+        mEditTextGenre = findViewById(R.id.add_genre);
+        mButtonAddGenre = findViewById(R.id.button_add_genre);
 
         mButtonAddGenre.setOnClickListener(new View.OnClickListener() {
             @Override

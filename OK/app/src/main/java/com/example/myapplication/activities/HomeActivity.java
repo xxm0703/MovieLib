@@ -19,7 +19,7 @@ public class HomeActivity extends AppCompatActivity {
 
         db = new Users(this);
 
-        NavigationView nav_view = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView nav_view = findViewById(R.id.nav_view);
 
         nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override

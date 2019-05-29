@@ -10,6 +10,7 @@ import android.os.Build;
 
 import com.example.myapplication.Config;
 import com.example.myapplication.models.Actor;
+import com.example.myapplication.models.Genre;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,9 +81,11 @@ public class Actors extends SQLiteOpenHelper {
     public boolean delete(Actor actor) {
         SQLiteDatabase db = this.getWritableDatabase();
         SQLiteStatement stmt = db.compileStatement("DELETE FROM actors " +
-                "WHERE ID = ?;");
+                "WHERE name = ?;");
 
-        stmt.bindLong(1, actor.getId());
+        if(actor != null) {
+            stmt.bindString(1, actor.getName());
+        }
         return stmt.executeUpdateDelete() > 0;
     }
 
@@ -121,6 +124,7 @@ public class Actors extends SQLiteOpenHelper {
         }
         return actor;
     }
+
 
     public List<Actor> extractActors() {
         SQLiteDatabase db = this.getReadableDatabase();

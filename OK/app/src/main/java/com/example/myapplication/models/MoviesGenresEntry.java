@@ -7,7 +7,7 @@ public class MoviesGenresEntry {
 
     private int genreId;
 
-    MoviesGenresEntry(int id, int movieId, int genreId) {
+    public MoviesGenresEntry(int id, int movieId, int genreId) {
         this.id = id;
         this.movieId = movieId;
         this.genreId = genreId;

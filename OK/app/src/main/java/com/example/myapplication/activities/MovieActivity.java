@@ -38,13 +38,13 @@ public class MovieActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        /*mButtonSeeAll.setOnClickListener(new View.OnClickListener() {
+        mButtonSeeAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MovieActivity.this, AllMoviesActivity.class);
                 startActivity(intent);
             }
-        });*/
+        });
         mButtonUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -146,6 +146,27 @@ public class Movies extends SQLiteOpenHelper {
         return movies;
     }
 
+    public ArrayList<String> extractMovieInformation() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor mCursor = db.rawQuery("SELECT * FROM movies;", null);
+        ArrayList<String> arrayList = null;
+
+        if (mCursor != null) {
+            if (mCursor.moveToFirst()) {
+                arrayList = new ArrayList<>();
+                do {
+                    String name = mCursor.getString(1);
+                    String date = mCursor.getString(2);
+                    String temp = name.concat(", ");
+                    String information = temp.concat(date);
+                    arrayList.add(information);
+                } while (mCursor.moveToNext());
+            }
+            mCursor.close();
+        }
+        return arrayList;
+    }
+
     private boolean exists(Movie movie) {
         return findById(movie.getId()) != null || findByName(movie.getName()) != null;
     }

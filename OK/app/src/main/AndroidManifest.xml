@@ -32,6 +32,7 @@
         <activity android:name=".activities.AddMovieActivity"> </activity>
         <activity android:name=".activities.DeleteMovieActivity"> </activity>
         <activity android:name=".activities.UpdateMovieActivity"> </activity>
+        <activity android:name=".activities.AllMoviesActivity"> </activity>
     </application>
 
 </manifest>

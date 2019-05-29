@@ -18,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
     Users db;
     EditText mTextEmail;
     EditText mTextPassword;
-    EditText mTextName;
     Button mButtonLogin;
     TextView mTextViewRegister;
 
@@ -30,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         db = new Users(this);
         mTextEmail = findViewById(R.id.email);
         mTextPassword = findViewById(R.id.password);
-        mTextName = findViewById(R.id.name);
         mButtonLogin = findViewById(R.id.button_login);
         mTextViewRegister = findViewById(R.id.textview_register);
 
@@ -48,15 +46,12 @@ public class MainActivity extends AppCompatActivity {
                 if (validate()) {
                     String Email = mTextEmail.getText().toString();
                     String Password = mTextPassword.getText().toString();
-                    String Name = mTextName.getText().toString();
 
-                    User currentUser = db.Authenticate(new User(Email, Password, Name));
-
+                    User currentUser = db.Authenticate(new User(Email, Password));
                     if (currentUser != null) {
                         Snackbar.make(mButtonLogin, "Successfully Logged In!", Snackbar.LENGTH_LONG).show();
                         Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                         startActivity(intent);
-                        //finish();
                     } else {
                         Snackbar.make(mButtonLogin, "Login Error! Please Try Again!", Snackbar.LENGTH_LONG).show();
 

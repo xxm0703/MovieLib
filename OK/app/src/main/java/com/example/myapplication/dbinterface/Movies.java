@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteStatement;
 import android.os.Build;
 
 import com.example.myapplication.Config;
+import com.example.myapplication.models.Actor;
 import com.example.myapplication.models.Movie;
 
 import java.util.ArrayList;
@@ -80,12 +81,19 @@ public class Movies extends SQLiteOpenHelper {
 
     public boolean delete(Movie movie) {
         SQLiteDatabase db = this.getWritableDatabase();
-        SQLiteStatement stmt = db.compileStatement("DELETE FROM movies " +
+
+        // Delete all associations with performing actors
+        SQLiteStatement deleteActorsAssociationsStmt = db.compileStatement("DELETE FROM movies_actors " +
+                "WHERE movie_id = ?;");
+        deleteActorsAssociationsStmt.bindLong(1, movie.getId());
+        boolean deleteActorsAssociationsResult = deleteActorsAssociationsStmt.executeUpdateDelete() > 0;
+
+        SQLiteStatement deleteMovieStmt = db.compileStatement("DELETE FROM movies " +
                 "WHERE ID = ?;");
+        deleteMovieStmt .bindLong(1, movie.getId());
+        boolean deleteMovieResult = deleteMovieStmt.executeUpdateDelete() > 0;
 
-        stmt.bindLong(1, movie.getId());
-
-        return stmt.executeUpdateDelete() > 0;
+        return deleteActorsAssociationsResult && deleteMovieResult;
     }
 
     public Movie findById(int id) {
@@ -123,6 +131,33 @@ public class Movies extends SQLiteOpenHelper {
             cursor.close();
         }
         return movie;
+    }
+
+    public List<Actor> getActors(Movie movie) {
+        String[] cols = new String[]{ String.valueOf(movie.getId()) };
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT a.id, a.name, a.age FROM movies m " +
+                "INNER JOIN movies_actors ma " +
+                "ON m.ID = ma.movie_id " +
+                "INNER JOIN actors a " +
+                "ON a.ID = ma.actor_id " +
+                "WHERE m.ID = ?;", cols);
+        List<Actor> actors = null;
+
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                actors = new ArrayList<>(cursor.getCount());
+                do {
+                    int actorId = cursor.getInt(0);
+                    String actorName = cursor.getString(1);
+                    int actorAge = cursor.getInt(2);
+
+                    actors.add(new Actor(actorId, actorName, actorAge));
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        }
+        return actors;
     }
 
     public List<Movie> extractMovies() {

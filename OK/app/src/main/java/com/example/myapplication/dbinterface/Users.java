@@ -10,12 +10,6 @@ import com.example.myapplication.Config;
 import com.example.myapplication.models.User;
 
 public class Users extends SQLiteOpenHelper {
-    public static final String TABLE_NAME = "users";
-    public static final String COL_2 = "email";
-    public static final String COL_3 = "password";
-    public static final String COL_4 = "name";
-
-
     public Users(Context context) {
         super(context, Config.DATABASE_NAME, null, Config.DATABASE_VERSION);
     }

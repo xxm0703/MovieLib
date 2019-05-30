@@ -2,6 +2,7 @@ package com.example.myapplication.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -10,8 +11,10 @@ import android.widget.Toast;
 import com.example.myapplication.R;
 import com.example.myapplication.dbinterface.Genres;
 import com.example.myapplication.dbinterface.Movies;
+import com.example.myapplication.models.Movie;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AllMoviesActivity extends AppCompatActivity {
     Movies db;
@@ -26,6 +29,13 @@ public class AllMoviesActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listview_all_movies);
 
         ArrayList<String> allMovies = db.extractMovieInformation();
+
+        List<Movie> movies = db.extractMovies();
+
+        for(Movie movie : movies) {
+            allMovies.addAll(db.getActors(movie));
+        }
+
         if (allMovies != null) {
             ArrayAdapter<String> itemsAdapter =
                     new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, allMovies);

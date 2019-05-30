@@ -147,7 +147,7 @@ public class Actors extends SQLiteOpenHelper {
         return arrayList;
     }
 
-    private boolean exists(Actor actor) {
+    public boolean exists(Actor actor) {
         return findById(actor.getId()) != null || findByName(actor.getName()) != null;
     }
 }

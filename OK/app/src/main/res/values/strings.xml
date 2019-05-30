@@ -41,4 +41,6 @@
     <string name="movie_date">Release Date</string>
     <string name="new_movie_name">New Name</string>
     <string name="new_movie_date">New Release Date</string>
+    <string name="movie_actors">Starring Actors:</string>
+    <string name="movie_genres">Genres:</string>
 </resources>

@@ -45,9 +45,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (validate()) {
                     String Email = mTextEmail.getText().toString();
-                    String Password = mTextPassword.getText().toString();
 
-                    User currentUser = db.Authenticate(new User(Email, Password));
+                    User currentUser = db.findByEmail(Email);
                     if (currentUser != null) {
                         Snackbar.make(mButtonLogin, "Successfully Logged In!", Snackbar.LENGTH_LONG).show();
                         Intent intent = new Intent(MainActivity.this, HomeActivity.class);

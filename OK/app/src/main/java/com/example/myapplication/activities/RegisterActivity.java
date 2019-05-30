@@ -52,9 +52,8 @@ public class RegisterActivity extends AppCompatActivity {
                     String Password = mTextPassword.getText().toString();
                     String Confirm_Password = mTextConfirmPassword.getText().toString();
                     String Name = mTextName.getText().toString();
-
-                    if (!db.isEmailExists(Email)) {
-                        db.addUser(new User(Email, Password, Name));
+                    User user = new User(Email, Password, Name);
+                    if (db.addUser(user)) {
                         Snackbar.make(mButtonRegister, "User created successfully! Please Login!", Snackbar.LENGTH_LONG).show();
                         new Handler().postDelayed(new Runnable() {
                             @Override

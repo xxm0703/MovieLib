@@ -1,6 +1,5 @@
 package com.example.myapplication.dbinterface;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -44,42 +43,39 @@ public class Users extends SQLiteOpenHelper {
         }
     }
 
-    public void addUser(User user) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(COL_2, user.email);
-        values.put(COL_3, user.password);
-        values.put(COL_4, user.name);
-        db.insert(TABLE_NAME, null, values);
-    }
-
-    public User Authenticate(User user) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_NAME,
-                new String[]{COL_2, COL_3, COL_4},
-                COL_2 + "=?",
-                new String[]{user.email},
-                null, null, null);
-
-        if (cursor != null && cursor.moveToFirst()&& cursor.getCount()>0) {
-            User new_user = new User(cursor.getString(0), cursor.getString(1));
-            if (user.password.equalsIgnoreCase(new_user.password)) {
-                return new_user;
-            }
+    public boolean addUser(User user) {
+        if(!isEmailExists(user)) {
+            SQLiteDatabase db = this.getWritableDatabase();
+            SQLiteStatement stmt = db.compileStatement("INSERT INTO users(email, password, name) " + "VALUES(?, ?, ?);");
+            stmt.bindString(1, user.getEmail());
+            stmt.bindString(2, user.getPassword());
+            stmt.bindString(3, user.getName());
+            return true;
         }
-        return null;
+        return false;
+
     }
 
-    public boolean isEmailExists(String email) {
+    public boolean isEmailExists(User user) {
+        return findByEmail(user.getEmail()) != null;
+
+    }
+
+    public User findByEmail(String email) {
+        String[] cols = new String[]{ email };
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_NAME,
-                new String[]{COL_2, COL_3, COL_4},
-                COL_2 + "=?",
-                new String[]{email},
-                null, null, null);
-
-        return cursor != null && cursor.moveToFirst() && cursor.getCount() > 0;
-
+        Cursor mCursor = db.rawQuery("SELECT * FROM users " + "WHERE email = ?;", cols);
+        User user = null;
+        if(mCursor != null) {
+            if(mCursor.moveToFirst()) {
+                String user_email = mCursor.getString(0);
+                String pass = mCursor.getString(1);
+                String name = mCursor.getString(2);
+                user = new User(user_email, pass, name);
+            }
+            mCursor.close();
+        }
+        return user;
     }
 
     public boolean update_information(String email, String password) {

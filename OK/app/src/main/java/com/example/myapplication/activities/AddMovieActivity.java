@@ -21,6 +21,8 @@ public class AddMovieActivity extends AppCompatActivity {
     Movies db;
     EditText mEditTextName;
     EditText mEditTextReleaseDate;
+    EditText mEditTextMovieActors;
+    EditText mEditTextMovieGenres;
     Button mButtonAddMovie;
 
     @Override
@@ -30,6 +32,8 @@ public class AddMovieActivity extends AppCompatActivity {
         db = new Movies(this);
         mEditTextName = (EditText) findViewById(R.id.add_movie_name);
         mEditTextReleaseDate = (EditText) findViewById(R.id.add_movie_date);
+        mEditTextMovieActors = (EditText) findViewById(R.id.add_movie_actors);
+        mEditTextMovieGenres = (EditText) findViewById(R.id.add_movie_genres);
         mButtonAddMovie = (Button) findViewById(R.id.button_add_movie);
 
         mButtonAddMovie.setOnClickListener(new View.OnClickListener() {

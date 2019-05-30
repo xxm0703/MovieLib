@@ -112,8 +112,8 @@ public class Movies extends SQLiteOpenHelper {
 
         if (cursor != null) {
             if (cursor.moveToFirst()) {
-                String name = cursor.getString(2);
-                Date release_date = new Date(cursor.getString(3));
+                String name = cursor.getString(1);
+                Date release_date = new Date(cursor.getString(2));
 
                 movie = new Movie(id, name, release_date);
             }
@@ -131,8 +131,8 @@ public class Movies extends SQLiteOpenHelper {
 
         if (cursor != null) {
             if (cursor.moveToFirst()) {
-                int id = cursor.getInt(1);
-                Date release_date = new Date(cursor.getString(3));
+                int id = cursor.getInt(0);
+                Date release_date = new Date(cursor.getString(2));
                 movie = new Movie(id, name, release_date);
             }
             cursor.close();
@@ -155,9 +155,9 @@ public class Movies extends SQLiteOpenHelper {
             if (cursor.moveToFirst()) {
                 actors = new ArrayList<>(cursor.getCount());
                 do {
-                    int actorId = cursor.getInt(1);
-                    String actorName = cursor.getString(2);
-                    int actorAge = cursor.getInt(3);
+                    int actorId = cursor.getInt(0);
+                    String actorName = cursor.getString(1);
+                    int actorAge = cursor.getInt(2);
 
                     actors.add(new Actor(actorId, actorName, actorAge));
                 } while (cursor.moveToNext());
@@ -182,8 +182,8 @@ public class Movies extends SQLiteOpenHelper {
             if (cursor.moveToFirst()) {
                 genres = new ArrayList<>(cursor.getCount());
                 do {
-                    int genreId = cursor.getInt(1);
-                    String genreName = cursor.getString(2);
+                    int genreId = cursor.getInt(0);
+                    String genreName = cursor.getString(1);
 
                     genres.add(new Genre(genreId, genreName));
                 } while (cursor.moveToNext());
@@ -202,9 +202,9 @@ public class Movies extends SQLiteOpenHelper {
             if (cursor.moveToFirst()) {
                 movies = new ArrayList<>(cursor.getCount());
                 do {
-                    int id = cursor.getInt(1);
-                    String name = cursor.getString(2);
-                    Date release_date = new Date(cursor.getString(3));
+                    int id = cursor.getInt(0);
+                    String name = cursor.getString(1);
+                    Date release_date = new Date(cursor.getString(2));
 
                     movies.add(new Movie(id, name, release_date));
                 } while (cursor.moveToNext());

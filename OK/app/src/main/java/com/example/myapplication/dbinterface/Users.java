@@ -17,7 +17,7 @@ public class Users extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS users(" +
-                "email TEXT PRIMARY KEY NOT NULL, " +
+                "email TEXT PRIMARY KEY NOT NULL UNIQUE, " +
                 "password TEXT NOT NULL, " +
                 "name TEXT" +
                 ");");
@@ -71,11 +71,16 @@ public class Users extends SQLiteOpenHelper {
         return user;
     }
 
-    public boolean update_information(String email, String password) {
+    public boolean update_information(String name, String password, User user) {
+        if(!isEmailExists(user)) {
+            return false;
+        }
         SQLiteDatabase db = this.getWritableDatabase();
-        SQLiteStatement stmt = db.compileStatement("UPDATE users SET password=? WHERE email=?");
-        stmt.bindString(1, password);
-        stmt.bindString(2, email);
+        SQLiteStatement stmt = db.compileStatement("UPDATE users SET name=?, password=? WHERE email=?");
+        stmt.bindString(1, name);
+        stmt.bindString(2, password);
+        user.setPassword(password);
+        stmt.bindString(3, user.getEmail());
         return stmt.executeUpdateDelete() != 0;
     }
 

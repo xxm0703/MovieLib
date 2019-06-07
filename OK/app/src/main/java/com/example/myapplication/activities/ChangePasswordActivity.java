@@ -16,6 +16,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
     Users db;
     EditText mEditTextChangeEmail;
     EditText mEditTextChangePassword;
+    EditText mEditTextChangeName;
     Button mButtonUpdate;
 
     @Override
@@ -27,19 +28,21 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
         mEditTextChangeEmail = findViewById(R.id.change_email);
         mEditTextChangePassword = findViewById(R.id.change_password);
+        mEditTextChangeName = findViewById(R.id.name);
         mButtonUpdate = findViewById(R.id.button_change_information);
 
         mButtonUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email = mEditTextChangeEmail.getText().toString();
+                String name = mEditTextChangeName.getText().toString();
                 String password = mEditTextChangePassword.getText().toString();
-
                 User user = db.findByEmail(email);
-                if(user != null) {
-                    boolean updated = db.update_information(user.getEmail(), password);
 
-                    if (updated) {
+                if(user != null) {
+                    boolean updated = db.update_information(email, password, user);
+
+                    if (updated && password == user.getPassword()) {
                         Intent toHome = new Intent(ChangePasswordActivity.this, MainActivity.class);
                         startActivity(toHome);
                     } else {

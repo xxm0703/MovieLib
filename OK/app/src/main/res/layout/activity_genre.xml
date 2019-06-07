@@ -32,6 +32,15 @@
             android:text="@string/add_genre"
             android:textColor="@android:color/white" />
         <Button
+            android:id="@+id/button_update_genre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:background="@color/colorAccent"
+            android:text="@string/update_genre"
+            android:textColor="@android:color/white" />
+        <Button
             android:id="@+id/button_delete_genre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

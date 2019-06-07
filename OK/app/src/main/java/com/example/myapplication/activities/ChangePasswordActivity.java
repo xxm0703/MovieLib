@@ -10,11 +10,11 @@ import android.widget.EditText;
 
 import com.example.myapplication.R;
 import com.example.myapplication.dbinterface.Users;
+import com.example.myapplication.models.User;
 
 public class ChangePasswordActivity extends AppCompatActivity {
     Users db;
     EditText mEditTextChangeEmail;
-    EditText mEditTextChangeName;
     EditText mEditTextChangePassword;
     Button mButtonUpdate;
 
@@ -26,7 +26,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
         db = new Users(this);
 
         mEditTextChangeEmail = findViewById(R.id.change_email);
-        mEditTextChangeName = findViewById(R.id.change_name);
         mEditTextChangePassword = findViewById(R.id.change_password);
         mButtonUpdate = findViewById(R.id.button_change_information);
 
@@ -35,8 +34,10 @@ public class ChangePasswordActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = mEditTextChangeEmail.getText().toString();
                 String password = mEditTextChangePassword.getText().toString();
-                String name = mEditTextChangeName.getText().toString();
-                boolean updated = db.update_information(email, password);
+
+                User user = db.findByEmail(email);
+
+                boolean updated = db.update_information(user.getEmail(), password);
 
                 if(updated) {
                     Intent toHome = new Intent(ChangePasswordActivity.this, MainActivity.class);

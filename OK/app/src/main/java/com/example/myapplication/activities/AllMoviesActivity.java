@@ -1,6 +1,8 @@
 package com.example.myapplication.activities;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -8,15 +10,14 @@ import android.widget.Toast;
 
 
 import com.example.myapplication.R;
-import com.example.myapplication.dbinterface.Genres;
 import com.example.myapplication.dbinterface.Movies;
-
 import java.util.ArrayList;
 
 public class AllMoviesActivity extends AppCompatActivity {
     Movies db;
     ListView listView;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +27,7 @@ public class AllMoviesActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listview_all_movies);
 
         ArrayList<String> allMovies = db.extractMovieInformation();
+
         if (allMovies != null) {
             ArrayAdapter<String> itemsAdapter =
                     new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, allMovies);

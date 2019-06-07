@@ -43,4 +43,11 @@
     <string name="new_movie_date">New Release Date</string>
     <string name="movie_actors">Starring Actors:</string>
     <string name="movie_genres">Genres:</string>
+    <string name="genre_name">Genre Name</string>
+    <string name="genre_new_name">Genre New Name</string>
+    <string name="update_genre">Update Genre</string>
+    <string name="new_actor_name">New Actor Name</string>
+    <string name="new_actor_age">New Actor Age</string>
+    <string name="update_actor">Update Actor</string>
+    <string name="email">Email</string>
 </resources>

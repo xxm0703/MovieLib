@@ -50,10 +50,9 @@ public class Users extends SQLiteOpenHelper {
             stmt.bindString(1, user.getEmail());
             stmt.bindString(2, user.getPassword());
             stmt.bindString(3, user.getName());
-            return true;
+            return stmt.executeInsert() != -1;
         }
         return false;
-
     }
 
     public boolean isEmailExists(User user) {

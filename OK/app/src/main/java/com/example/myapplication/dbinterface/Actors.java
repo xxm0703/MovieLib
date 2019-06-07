@@ -63,7 +63,7 @@ public class Actors extends SQLiteOpenHelper {
         return false;
     }
 
-    public boolean update(Actor actor) {
+    public boolean update(String name, int age, Actor actor) {
         if (!exists(actor)) {
             return false;
         }
@@ -72,8 +72,8 @@ public class Actors extends SQLiteOpenHelper {
         SQLiteStatement stmt = db.compileStatement("UPDATE actors " +
                 "SET name = ?, age = ? " +
                 "WHERE ID = ?;");
-        stmt.bindString(1, actor.getName());
-        stmt.bindLong(2, actor.getAge());
+        stmt.bindString(1, name);
+        stmt.bindLong(2, age);
         stmt.bindLong(3, actor.getId());
         return stmt.executeUpdateDelete() != 0;
     }
@@ -147,7 +147,7 @@ public class Actors extends SQLiteOpenHelper {
         return arrayList;
     }
 
-    private boolean exists(Actor actor) {
+    public boolean exists(Actor actor) {
         return findById(actor.getId()) != null || findByName(actor.getName()) != null;
     }
 }

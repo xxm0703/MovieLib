@@ -12,6 +12,8 @@ public class ActorActivity extends AppCompatActivity {
     Button mButtonAdd;
     Button mButtonDelete;
     Button mButtonAllActors;
+    Button mButtonUpdateActors;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -21,6 +23,7 @@ public class ActorActivity extends AppCompatActivity {
         mButtonAdd = findViewById(R.id.button_add_actor);
         mButtonDelete = findViewById(R.id.button_delete_actor);
         mButtonAllActors = (Button) findViewById(R.id.button_see_all_actors);
+        mButtonUpdateActors = (Button) findViewById(R.id.button_update_actor);
 
         mButtonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,6 +43,13 @@ public class ActorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ActorActivity.this, AllActorsActivity.class);
+                startActivity(intent);
+            }
+        });
+        mButtonUpdateActors.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActorActivity.this, UpdateActorsActivity.class);
                 startActivity(intent);
             }
         });

@@ -60,12 +60,25 @@ public class Genres extends SQLiteOpenHelper {
         return false;
     }
 
+    public boolean update(String name, Genre genre) {
+        if(!exists(genre)) {
+            return false;
+        }
+        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteStatement stmt = db.compileStatement("UPDATE genres SET name=? WHERE ID=?");
+        stmt.bindString(1, name);
+        stmt.bindLong(2, genre.getId());
+        return stmt.executeUpdateDelete() != 0;
+    }
+
     public boolean delete(Genre genre) {
         SQLiteDatabase db = this.getWritableDatabase();
         SQLiteStatement stmt = db.compileStatement("DELETE FROM genres " +
                 "WHERE ID = ?;");
 
-        stmt.bindLong(1, genre.getId());
+        if(genre != null) {
+            stmt.bindLong(1, genre.getId());
+        }
         return stmt.executeUpdateDelete() > 0;
     }
 

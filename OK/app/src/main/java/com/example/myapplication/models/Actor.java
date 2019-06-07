@@ -19,6 +19,14 @@ public class Actor {
         this.age = age;
     }
 
+    public Actor(String name) {
+        this.name = name;
+    }
+
+    public Actor(String trim, String name) {
+        this.name = name;
+    }
+
     public int getId() {
         return id;
     }

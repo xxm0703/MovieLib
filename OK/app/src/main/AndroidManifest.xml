@@ -27,6 +27,8 @@
         <activity android:name=".activities.AddActorActivity"> </activity>
         <activity android:name=".activities.ActorActivity"> </activity>
         <activity android:name=".activities.AllGenresActivity"> </activity>
+        <activity android:name=".activities.UpdateGenresActivity"> </activity>
+        <activity android:name=".activities.UpdateActorsActivity"> </activity>
         <activity android:name=".activities.AllActorsActivity"> </activity>
         <activity android:name=".activities.MovieActivity"> </activity>
         <activity android:name=".activities.AddMovieActivity"> </activity>

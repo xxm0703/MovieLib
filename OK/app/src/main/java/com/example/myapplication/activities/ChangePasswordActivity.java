@@ -36,16 +36,18 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 String password = mEditTextChangePassword.getText().toString();
 
                 User user = db.findByEmail(email);
+                if(user != null) {
+                    boolean updated = db.update_information(user.getEmail(), password);
 
-                boolean updated = db.update_information(user.getEmail(), password);
-
-                if(updated) {
-                    Intent toHome = new Intent(ChangePasswordActivity.this, MainActivity.class);
-                    startActivity(toHome);
+                    if (updated) {
+                        Intent toHome = new Intent(ChangePasswordActivity.this, MainActivity.class);
+                        startActivity(toHome);
+                    } else {
+                        Snackbar.make(mButtonUpdate, "Password was not changed! Please, try again!", Snackbar.LENGTH_LONG).show();
+                    }
                 } else {
-                    Snackbar.make(mButtonUpdate, "Password was not changed! Please, try again!", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(mButtonUpdate, "No such person!", Snackbar.LENGTH_LONG).show();
                 }
-
             }
         });
     }

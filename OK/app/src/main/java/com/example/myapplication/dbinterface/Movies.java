@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 
 import com.example.myapplication.Config;
 import com.example.myapplication.models.Actor;
@@ -16,7 +15,6 @@ import com.example.myapplication.models.Movie;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class Movies extends SQLiteOpenHelper {
@@ -135,8 +133,7 @@ public class Movies extends SQLiteOpenHelper {
         return movie;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public String getActors(Movie movie) {
+    public List<Actor> getActors(Movie movie) {
         String[] cols = new String[]{ String.valueOf(movie.getId()) };
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT a.id, a.name, a.age FROM movies m " +
@@ -145,20 +142,22 @@ public class Movies extends SQLiteOpenHelper {
                 "INNER JOIN actors a " +
                 "ON a.ID = ma.actor_id " +
                 "WHERE m.ID = ?;", cols);
-        ArrayList<String> actors = new ArrayList<>();
+        List<Actor> actors = null;
 
         if (cursor != null) {
             if (cursor.moveToFirst()) {
-                actors = new ArrayList<>();
+                actors = new ArrayList<>(cursor.getCount());
                 do {
+                    int actorId = cursor.getInt(0);
                     String actorName = cursor.getString(1);
+                    int actorAge = cursor.getInt(2);
 
-                    actors.add(actorName);
+                    actors.add(new Actor(actorId, actorName, actorAge));
                 } while (cursor.moveToNext());
             }
             cursor.close();
         }
-        return String.join(",", actors);
+        return actors;
     }
 
     public List<Movie> extractMovies() {
